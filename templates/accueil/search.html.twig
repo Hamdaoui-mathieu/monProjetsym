@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<div class="container-fluid">
+    <div class="row">
+        <?php foreach ($tableau_resultats as $plat) : ?>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                <a href="detail_plat.php?id=<?= $plat->id ?>">
+                    <img src="images_the_district/food/<?= $plat->image ?>" class="rounded img-responsive ;" height="250px" width="250px">
+                </a>
+                <br>
+                <br>
+                <p class="cadre"><strong><?= $plat->libelle  ?></strong><br>
+
+            </div>
+        {# <?php endforeach; ?> #}
+    </div>
+</div>
+
+
+{% endblock %}
+<!-- <div class="container-fluid"> 
+    <div class="row">
+        <?php foreach ($tableau_resultats2 as $plat) :?>
+            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
+                <a href="detail_plat.php?id=<?= $plat->id ?>">
+                    <img src="images_the_district/food/<?= $plat->image ?>" class="rounded img-responsive ;" height="250px" width="250px">
+                </a>
+                <br>
+                <br>
+                <p class="cadre"><strong><?= $plat->libelle  ?></strong><br>
+
+            </div>
+        <?php endforeach; ?>
+    </div>
+</div>
+
+
+
+<?php include('footer.php'); ?>
+</div-->

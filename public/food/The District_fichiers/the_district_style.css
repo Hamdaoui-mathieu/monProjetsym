@@ -1,0 +1,195 @@
+.bg1 {
+    background-image: url(images_the_district/bg.jpg);
+    background-size: 100vw;
+    background-repeat: no-repeat;
+    padding: 8%;
+}
+
+.bg2 {
+    background-image: url(images_the_district/bg1.jpeg);
+    background-size: 100vw;
+    background-repeat: no-repeat;
+    padding: 7%;
+}
+
+.bg3 {
+    background-image: url(images_the_district/bg2.jpeg);
+    background-size: 100vw;
+    background-repeat: no-repeat;
+    padding: 7%;
+}
+
+.bg4 {
+    background-image: url(images_the_district/bg3.jpeg);
+    background-size: 100vw;
+    background-repeat: no-repeat;
+    padding: 7%;
+}
+
+.zoom:hover{
+    -ms-transform: scale(0.8); /* IE 9 */
+    -webkit-transform: scale(0.8); ; /* Safari 3-8 */
+    transform: scale(0.8);
+    }
+p{
+    font-family: cursive;
+    font-size: xx-large;
+    
+}
+.search {
+    width: 40%;
+}
+
+.afftexton .afftext {
+    opacity: 0;
+    
+}
+.afftexton:hover .afftext{
+    opacity: 100% !important;
+
+}
+.fond {
+    overflow: hidden;
+    position: relative;
+}
+
+
+
+.back {
+    background-color: rgba(194, 189, 189, 0.541);
+    background: no-repeat center center;
+    width: 100%;
+    height:100%;
+    opacity: 0.6;
+    left: 0;
+    top: 0;
+    position: fixed;
+
+}
+
+.content {
+    position: relative;
+}
+
+.back2 {
+    background-image: url(images_the_district/bg2.jpeg);
+}
+
+.row2 {
+    text-align: center;
+}
+
+.titre {
+    margin-left: 15%;
+
+}
+
+.titre2 {
+    margin-left: 45%;
+}
+
+.img {
+    margin-left: 15%;
+    border-radius: 50px;
+}
+
+.repas {
+    display: flex;
+    font-size: large;
+}
+
+.gap {
+    margin-left: 5%;
+}
+
+nav {
+    display: flex;
+    /* background-color: rgba(194, 189, 189, 0.541); */
+    line-height: 25px;
+    width: 100%;
+}
+
+label {
+    display: block;
+    width: 200px;
+    float: left;
+}
+
+.input {
+    float: left;
+}
+
+.colonne {
+    column-count: 4;
+}
+
+.colonne2 {
+    column-count: 3;
+    text-align: center;
+}
+
+img {
+    box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    -webkit-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 5px 0px rgba(0, 0, 0, 0.75);
+}
+
+.imgclass {
+    box-shadow: 15px 15px 15px rgb(88, 211, 233) !important;
+}
+
+
+.titre {
+    color: rgb(77, 255, 0);
+}
+
+@media screen and (max-width: 768px) {
+
+
+    nav {
+        display: flex;
+        flex-direction: column;
+        align-items: right;
+
+    }
+
+    ul {
+        display: initial;
+    }
+
+    nav{
+        display: flex;
+        align-items: center;
+        /* background-color: rgba(194, 189, 189, 0.541); */
+    }
+
+    .back {
+        background-color: rgba(194, 189, 189, 0.541);
+        background: url('images_the_district/bg3.jpeg');
+        width: 100%;
+        opacity: 0.5;
+        left: 0;
+        top: 0;
+        position: fixed;
+
+    }
+    .content {
+        position: relative;
+    }
+
+    .fond {
+        overflow: hidden;
+        position: relative;
+    }
+
+    .reseaux {
+        align-items: center;
+        width: 15%;
+    }
+
+    .search{
+    float: right;
+    }
+
+}
+
