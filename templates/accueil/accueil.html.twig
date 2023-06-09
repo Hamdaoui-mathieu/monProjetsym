@@ -15,15 +15,13 @@
 
     <div class="row">
 
-        <?php foreach ($tableau as $categorie) :  ?>
-
             <!-- <div class="container-fluid"> -->
 
             <div class="col afftexton col-lg-4 col-md-4 col-sm-6 col-xs-12" >
      
                 <a href="plat_categorie?id_categorie=<?= $categorie->id ?>">
              
-                    <img class="zoom" src="//category/<?= $categorie->image ?>" class="rounded img-responsive;" height="250px" width="250px">
+                    <img class="zoom" src="{{asset('/category/')}}asian_food_cat.jpg" class="rounded img-responsive;" height="250px" width="250px">
                 </a>
         
                 <br>
@@ -37,7 +35,7 @@
 
             <!-- <br> -->
             <!-- </div> -->
-        <?php endforeach; ?>
+
 
     </div>
 </div>
