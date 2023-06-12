@@ -2,17 +2,28 @@
 
 namespace App\Controller;
 
+use App\Form\ContactFormType;
+use App\Repository\PlatRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
+
+
+
+
+
 class AccueilController extends AbstractController
 {
     #[Route('/accueil', name: 'app_accueil')]
-    public function accueil(): Response
+    public function accueil(PlatRepository $platRepo): Response
     {
+        $plats = $platRepo->findAll();
+
         return $this->render('accueil/accueil.html.twig', [
             'controller_name' => 'AccueilController',
+            'plats' => $plats
         ]);
     }
 
@@ -35,13 +46,13 @@ class AccueilController extends AbstractController
     }
 
 
-    #[Route('/contact', name: 'app_contact')]
-    public function contact(): Response
-    {
-        return $this->render('accueil/contact.html.twig', [
-            'controller_name' => 'AccueilController',
-        ]);
-    }
+    // #[Route('/contact', name: 'app_contact')]
+    // public function contact(): Response
+    // {
+    //     return $this->render('accueil/contact.html.twig', [
+    //         'controller_name' => 'AccueilController',
+    //     ]);
+    // }
 
 
     #[Route('/connexion', name: 'app_connexion')]
