@@ -13,17 +13,29 @@
 
 <div class="container-fluid">
 
-    <div class="row">
+  {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
 
-        <?php foreach ($tableau as $categorie) :  ?>
+    <div class="row">
+    {# {{ dump(plats)}} #}
 
             <!-- <div class="container-fluid"> -->
+            {% for plat in plats %}
+
+            <div> 
+            <img class="zoom" src=  {{plat.image}} class="rounded img-responsive;" height="250px" width="250px">
+            {{plat.libelle}}
+            </div>
+            {% endfor %}
 
             <div class="col afftexton col-lg-4 col-md-4 col-sm-6 col-xs-12" >
      
                 <a href="plat_categorie?id_categorie=<?= $categorie->id ?>">
              
-                    <img class="zoom" src="//category/<?= $categorie->image ?>" class="rounded img-responsive;" height="250px" width="250px">
+                   
                 </a>
         
                 <br>
@@ -37,7 +49,7 @@
 
             <!-- <br> -->
             <!-- </div> -->
-        <?php endforeach; ?>
+
 
     </div>
 </div>
