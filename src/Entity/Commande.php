@@ -17,7 +17,7 @@ class Commande
     private ?int $id = null;
 
     #[ORM\Column(type: Types::DATE_MUTABLE)]
-    private ?\DateTimeInterface $date_commande = null;
+    private ?\DateTime $date_commande = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: '0')]
     private ?string $total = null;
@@ -27,29 +27,32 @@ class Commande
 
  
 
-    #[ORM\ManyToOne(inversedBy: 'commandes')]
-    private ?Utilisateur $utilisateur = null;
 
     #[ORM\OneToMany(mappedBy: 'commande', targetEntity: Detail::class)]
     private Collection $details;
+
+    #[ORM\ManyToOne(inversedBy: 'commandes')]
+    private ?Utilisateur $utilisateur = null;
+
 
     public function __construct()
     {
         
         $this->details = new ArrayCollection();
     }
+       
 
     public function getId(): ?int
     {
         return $this->id;
     }
 
-    public function getDateCommande(): ?\DateTimeInterface
+    public function getDateCommande(): ?\DateTime
     {
         return $this->date_commande;
     }
 
-    public function setDateCommande(\DateTimeInterface $date_commande): self
+    public function setDateCommande(\DateTime $date_commande): self
     {
         $this->date_commande = $date_commande;
 
@@ -80,17 +83,6 @@ class Commande
         return $this;
     }
 
-    public function getUtilisateur(): ?Utilisateur
-    {
-        return $this->utilisateur;
-    }
-
-    public function setUtilisateur(?Utilisateur $utilisateur): self
-    {
-        $this->utilisateur = $utilisateur;
-
-        return $this;
-    }
 
     /**
      * @return Collection<int, Detail>
@@ -122,7 +114,17 @@ class Commande
         return $this;
     }
 
-    
+    public function getUtilisateur(): ?Utilisateur
+    {
+        return $this->utilisateur;
+    }
+
+    public function setUtilisateur(?Utilisateur $utilisateur): self
+    {
+        $this->utilisateur = $utilisateur;
+
+        return $this;
+    }
 
 
 }

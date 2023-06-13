@@ -5,12 +5,35 @@ namespace App\DataFixtures;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use App\Entity\Categorie;
+use App\Entity\Commande;
 use App\Entity\Plat;
+use App\Entity\Utilisateur;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class Datafixture extends Fixture
 {
+    private $hasher;
+    public function __construct(UserPasswordHasherInterface $hasher){
+        $this->hasher = $hasher;
+    }
+    
+    
     public function load(ObjectManager $manager): void
     {
+            $utilisateur1 = new Utilisateur();
+
+            $utilisateur1 ->setEmail("Mathieu@gmail.com");
+            $utilisateur1 ->setPassword($this->hasher->hashPassword($utilisateur1, 'moi'));
+            $utilisateur1 ->setNom("Hamdaoui");
+            $utilisateur1 ->setPrenom("Mathieu");
+            $utilisateur1 ->setTelephone("0677142684");
+            $utilisateur1 ->setAdresse("22 rue d'Amiens");
+            $utilisateur1 ->setCp("80000");
+            $utilisateur1 ->setVille("Candas");
+            $utilisateur1 ->setRoles([0]);
+
+            $manager->persist($utilisateur1);
+
         // $product = new Product();
         // $manager->persist($product);
             $categorie1 = new Categorie();
@@ -300,6 +323,35 @@ class Datafixture extends Fixture
             $plat16->setCategorie($categorie5);
 
             $manager->persist($plat16);
+            $manager->flush();
+
+
+            $commande1 = new Commande();
+
+            $commande1->setDateCommande(new \DateTime("2020-11-30 03:52:43"));
+            $commande1->settotal(16.0);
+            $commande1->setetat(3);
+            $commande1->setUtilisateur($utilisateur1);
+            $manager->persist($commande1);
+
+
+            // $commande2 = new Commande();
+
+            // $commande2->setdate_commande();
+            // $commande2->settotal();
+            // $commande2->setetat(3);
+
+            // $manager->persist($commande2);
+
+
+            // $commande3 = new Commande();
+
+            // $commande3->setdate_commande();
+            // $commande3->settotal();
+            // $commande3->setetat(3);
+
+            // $manager->persist($commande3);
+
             $manager->flush();
         }
     }

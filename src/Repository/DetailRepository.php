@@ -4,6 +4,7 @@ namespace App\Repository;
 
 use App\Entity\Detail;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
+use Doctrine\ORM\Mapping\OrderBy;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
@@ -39,20 +40,22 @@ class DetailRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Detail[] Returns an array of Detail objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('d')
-//            ->andWhere('d.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('d.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   /**
+    * @return Detail[] Returns an array of Detail objects
+    */
+   public function findCategoriesPopulaires(): array
+   {
+       return $this->createQueryBuilder('d')
+           ->select('count(cmmd.id), cat.libelle')
+           ->join('d.commande', 'cmmd')
+           ->join('d.plat', 'p')
+           ->join('p.categorie', 'cat')
+           ->orderBy('count(cmmd.id)', 'desc')
+           ->setMaxResults(6)
+           ->getQuery()
+           ->getResult()
+       ;
+   }
 
 //    public function findOneBySomeField($value): ?Detail
 //    {
