@@ -4,14 +4,24 @@
 
 <h1><strong>Details</strong></h1>
 
-<?php foreach ($tableau as $categorie) :  ?>
+{# {% for plat in plats %} #}
 
     <div class="container-fluid">
         <div class="row">
 
             <div class="col-sm-6">
+               <div class="col afftexton col-lg-4 col-md-4 col-sm-6 col-xs-12" >
+                <img class="zoom" src="{{ '/food/' ~ plat.image }}" class="rounded img-responsive;" height="250px" width="250px"> 
+                <br>
+                <br>
+                {{plat.libelle}}<br>
+                {{plat.description}}<br>
+                {{plat.active}}<br>
+                {{plat.prix}}<br>
+            </div>
+        {# {% endfor %} #}
 
-                <img src="/images_the_district/food/<?= $categorie->image ?>" class="rounded img-responsive ;" height="250px" width="250px"">
+                {# <img src="/images_the_district/food/<?= $categorie->image ?>" class="rounded img-responsive ;" height="250px" width="250px"">
             </div>
             <div class="col-sm-6">
                 <br>
@@ -29,7 +39,7 @@
                                         
                 </div>
 
-            </div>
+            </div> #}
         </div>
     </div>
 

@@ -10,7 +10,21 @@
 <div class="container-fluid">
 
     <div class="row">
-        <?php foreach ($tableau as $plat) : ?>
+
+            {% for plat in plats %}
+
+            <div class="col afftexton col-lg-4 col-md-4 col-sm-6 col-xs-12" >
+            <a href="{{path('app_detail_plat', {"id" : plat.id })}}">
+                <img class="zoom" src=  {{plat.image}} class="rounded img-responsive;" height="250px" width="250px"> 
+            </a>
+                <br>
+                <br>
+                {{plat.libelle}}
+
+            </div>
+
+        {% endfor %}
+        {# <?php foreach ($tableau as $plat) : ?>
 
 
             <div class="col afftexton col-lg-4 col-md-4 col-sm-6 col-xs-12">
@@ -39,4 +53,4 @@
 
 </div>
 
-{% endblock %}
+{% endblock %} 

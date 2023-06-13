@@ -23,32 +23,22 @@
     {# {{ dump(plats)}} #}
 
             <!-- <div class="container-fluid"> -->
-            {% for plat in plats %}
-
-            <div> 
-            <img class="zoom" src=  {{plat.image}} class="rounded img-responsive;" height="250px" width="250px">
-            {{plat.libelle}}
-            </div>
-            {% endfor %}
+             
+        {% for categorie in categories %}
 
             <div class="col afftexton col-lg-4 col-md-4 col-sm-6 col-xs-12" >
-     
-                <a href="plat_categorie?id_categorie=<?= $categorie->id ?>">
-             
-                   
-                </a>
-        
+            <a href="{{path('app_categorie')}}">
+                <img class="zoom" src=  {{categorie.image}} class="rounded img-responsive;" height="250px" width="250px"> 
+            </a>
                 <br>
                 <br>
-                <div>
-                    <p class="reseaux afftext"><strong><?= $categorie->libelle  ?></strong><br>
-                </div>
+                {{categorie.libelle}}
+              
             </div>
-
-            <!-- </div> -->
-
-            <!-- <br> -->
-            <!-- </div> -->
+        {% endfor %}
+     
+                
+             
 
 
     </div>
@@ -58,11 +48,22 @@
 <br>
 <div class="container-fluid">
     <div class="row">
-       
+        
+        {% for plat in plats %}
 
+            <div class="col afftexton col-lg-4 col-md-4 col-sm-6 col-xs-12" >
+                <a href="{{path('app_detail_plat')}}">
+                    <img class="zoom" src=  {{plat.image}} class="rounded img-responsive;" height="250px" width="250px"> 
+                </a>
+                    <br>
+                    <br>
+                    {{plat.libelle}}
+              
+            </div>
+        {% endfor %}
             <!-- <div class="container-fluid"> -->
 
-            <div class="col afftexton col-lg-4 col-md-4 col-sm-6 col-xs-12">
+            {# <div class="col afftexton col-lg-4 col-md-4 col-sm-6 col-xs-12">
                 <a class='' href="detail_plat.php?id=<?= $categorie->id ?>">
 
                     <img src="//food/<?= $categorie->image ?>" class="rounded img-responsive" height="255px" width="255px" ;>
@@ -72,7 +73,7 @@
                 <div>
                     <p class="reseaux afftext"><strong><?= $categorie->libelle  ?></strong><br>
                 </div>
-            </div>
+            </div> #}
             <!-- </div> -->
 
             <!-- <br> -->
