@@ -15,7 +15,29 @@
 
 <div class="container-fluid">
     <div class="row">
-        <?php foreach ($tableau as $plat) : ?>
+
+{% for plats in plat %}
+{% if plats.categorie == idcat %}
+
+
+
+            <div class="col afftexton col-lg-4 col-md-4 col-sm-6 col-xs-12" >
+             <a href="{{path('app_detail_plat', {"id" : plats.id })}}"> 
+                <img class="zoom" src="{{ '/food/' ~ plats.image }}" class="rounded img-responsive;" height="250px" width="250px"> 
+             </a> 
+                <br>
+                <br>
+                {{plats.libelle}}
+              
+            </div>
+            {% endif %}
+        {% endfor %} 
+
+
+
+
+
+        {# <?php foreach ($tableau as $plat) : ?>
             <div class="afftexton col-lg-3 col-md-4 col-sm-6 col-xs-12">
                 <a href="detail_plat.php?id=<?= $plat->id ?>">
                     <img src="images_the_district/food/<?= $plat->image ?>" class="rounded img-responsive ;" height="250px" width="250px">
@@ -31,7 +53,7 @@
                     <br>
                 <br>
             </div>
-        {# <?php endforeach; ?> #}
+        <?php endforeach; ?> #}
     </div>
 </div>
 

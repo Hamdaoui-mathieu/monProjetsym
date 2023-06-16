@@ -39,20 +39,49 @@ class PlatRepository extends ServiceEntityRepository
         }
     }
 
-//    /**
-//     * @return Plat[] Returns an array of Plat objects
-//     */
-//    public function findByExampleField($value): array
-//    {
-//        return $this->createQueryBuilder('p')
-//            ->andWhere('p.exampleField = :val')
-//            ->setParameter('val', $value)
-//            ->orderBy('p.id', 'ASC')
-//            ->setMaxResults(10)
-//            ->getQuery()
-//            ->getResult()
-//        ;
-//    }
+   /**
+    * @return Plat[] Returns an array of Detail objects
+    */
+    public function findPlatPopulaires(): array
+    {
+        return $this->createQueryBuilder('d')
+            // ->select('count(cmmd.id), cat.libelle')
+            // ->join('d.commande', 'cmmd')
+            // ->join('d.plat', 'p')
+            // ->join('p.categorie', 'cat')
+            // ->orderBy('count(cmmd.id)', 'desc')
+            ->setMaxResults(3)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
+    public function findSearch($search): array
+    {
+        $libelle = '%'.$search.'%';
+        $description = '%'.$search.'%';
+
+        return $this->createBuilder('s')
+            ->select('plat.id, plat.image, plat.libelle')
+            ->andwhere('libelle = :libelle, description = :description')
+            ->setParameter(':libelle', $libelle)
+            ->setParameter(':description', $description)
+            ->getQuery()
+            ->getResult()
+            ;
+
+    }
+
+    // public function findPlatCategorie():array
+    // {
+    //      return $this->createQueryBuilder('id')
+    //          ->andWhere('id_categorie = :id_categorie')
+    //         ->setParameter('id_categorie', $platcat)
+    //          ->getQuery()
+    //          ->getResult()
+    //      ;
+    //  }
+
 
 //    public function findOneBySomeField($value): ?Plat
 //    {

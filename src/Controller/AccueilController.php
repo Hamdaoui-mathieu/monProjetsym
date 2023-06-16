@@ -3,7 +3,15 @@
 namespace App\Controller;
 
 use App\Form\ContactFormType;
+use App\Entity\Plat;
+use App\Entity\Categorie;
 use App\Repository\PlatRepository;
+use App\Repository\CategorieRepository;
+use App\Repository\CommandeRepository;
+use App\Repository\ContactRepository;
+use App\Repository\DetailRepository;
+use App\Repository\UtilisateurRepository;
+use Egulias\EmailValidator\Result\Reason\DetailedReason;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -16,32 +24,64 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AccueilController extends AbstractController
 {
-    #[Route('/accueil', name: 'app_accueil')]
-    public function accueil(PlatRepository $platRepo): Response
+    private $platRepo;
+    private $categorieRepo;
+    private $detailRepo;
+    private $contactRepo;
+    private $utilisateurRepo;
+    private $commandeRepo;
+
+    public function __construct(PlatRepository $platRepo, CategorieRepository $categorieRepo, DetailRepository $detailRepo, ContactRepository $contactRepo, 
+    UtilisateurRepository $utilisateurRepo, CommandeRepository $commandeRepo)
     {
-        $plats = $platRepo->findAll();
+        $this->platRepo = $platRepo;
+        $this->categorieRepo = $categorieRepo;
+        $this->detailRepo = $detailRepo;
+        $this->contactRepo = $contactRepo;
+        $this->utilisateurRepo = $utilisateurRepo;
+        $this->commandeRepo = $commandeRepo;
+    }
+
+    
+    #[Route('/accueil', name: 'app_accueil')]
+    public function accueil(PlatRepository $platRepo, CategorieRepository $categorieRepo, DetailRepository $detailRepo): Response
+    {
+        $catPop = $detailRepo->findCategoriesPopulaires();
+        // dd($catPop);
+
+        $plats = $platRepo->findPlatPopulaires();
+        $categories = $categorieRepo->find6Categories();
 
         return $this->render('accueil/accueil.html.twig', [
             'controller_name' => 'AccueilController',
-            'plats' => $plats
+            'plats' => $plats,
+            'categories' => $categories
         ]);
     }
 
 
     #[Route('/categorie', name: 'app_categorie')]
-    public function categorie(): Response
+    public function categorie( CategorieRepository $categorieRepo): Response
     {
+        // $plats = $platRepo->findAll();
+        $categories = $categorieRepo->findAll();
+
         return $this->render('accueil/categorie.html.twig', [
             'controller_name' => 'AccueilController',
+            // 'plats' => $plats,
+            'categories' => $categories
         ]);
     }
 
 
     #[Route('/plat', name: 'app_plat')]
-    public function plat(): Response
+    public function plat(PlatRepository $platRepo): Response
     {
+        $plats = $platRepo->findAll();
+
         return $this->render('accueil/plat.html.twig', [
             'controller_name' => 'AccueilController',
+            'plats' => $plats
         ]);
     }
 
@@ -64,20 +104,29 @@ class AccueilController extends AbstractController
     }
 
 
-    #[Route('/detail_plat', name: 'app_detail_plat')]
-    public function detail_plat(): Response
+    #[Route('/detail_plat/{id}', name: 'app_detail_plat')]
+    public function detail_plat(Plat $id, PlatRepository $platRepo): Response
     {
+        $plat = $platRepo->find($id);
+
         return $this->render('accueil/detail_plat.html.twig', [
             'controller_name' => 'AccueilController',
+            'plat' => $plat
         ]);
     }
 
 
-    #[Route('/plat_categorie', name: 'app_plat_categorie')]
-    public function plat_categorie(): Response
+    #[Route('/plat_categorie/{libelle}', name: 'app_plat_categorie')]
+    public function plat_categorie(Categorie $id, CategorieRepository $categorieRepo, PlatRepository $platRepo): Response
     {
+        $plat = $platRepo->findAll();
+        $idcat = $categorieRepo->find($id);
+
         return $this->render('accueil/plat_categorie.html.twig', [
             'controller_name' => 'AccueilController',
+            'plat' => $plat,
+            'idcat' => $idcat
+            
         ]);
     }
 
@@ -100,10 +149,13 @@ class AccueilController extends AbstractController
 
 
     #[Route('/search', name: 'app_search')]
-    public function search(): Response
+    public function search(PlatRepository $platRepo): Response
     {
+        // $plat = $platRepo->findSearch($search);
+
         return $this->render('accueil/search.html.twig', [
             'controller_name' => 'AccueilController',
+            // 'plat'=> $plat
         ]);
     }
 }

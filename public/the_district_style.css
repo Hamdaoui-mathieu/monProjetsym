@@ -1,26 +1,33 @@
 .bg1 {
-    background-image: url(images_the_district/bg.jpg);
+    background-image: url(/bg.jpg);
     background-size: 100vw;
     background-repeat: no-repeat;
     padding: 8%;
 }
 
+
+.fosy {
+    background-image: url(/fosyyyy.jpg);
+    background-size: 100vw;
+    background-repeat: no-repeat;
+    padding: 8%;
+}
 .bg2 {
-    background-image: url(images_the_district/bg1.jpeg);
+    background-image: url(/bg1.jpeg);
     background-size: 100vw;
     background-repeat: no-repeat;
     padding: 7%;
 }
 
 .bg3 {
-    background-image: url(images_the_district/bg2.jpeg);
+    background-image: url(/bg2.jpeg);
     background-size: 100vw;
     background-repeat: no-repeat;
     padding: 7%;
 }
 
 .bg4 {
-    background-image: url(images_the_district/bg3.jpeg);
+    background-image: url(/bg3.jpeg);
     background-size: 100vw;
     background-repeat: no-repeat;
     padding: 7%;
@@ -31,6 +38,7 @@
     -webkit-transform: scale(0.8); ; /* Safari 3-8 */
     transform: scale(0.8);
     }
+    
 p{
     font-family: cursive;
     font-size: xx-large;
@@ -72,7 +80,7 @@ p{
 }
 
 .back2 {
-    background-image: url(images_the_district/bg2.jpeg);
+    background-image: url(/bg2.jpeg);
 }
 
 .row2 {
