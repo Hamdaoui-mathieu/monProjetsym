@@ -104,7 +104,7 @@ class AccueilController extends AbstractController
     }
 
 
-    #[Route('/detail_plat/{id}', name: 'app_detail_plat')]
+    #[Route('/detail_plat/{libelle}', name: 'app_detail_plat')]
     public function detail_plat(Plat $id, PlatRepository $platRepo): Response
     {
         $plat = $platRepo->find($id);
@@ -149,13 +149,14 @@ class AccueilController extends AbstractController
 
 
     #[Route('/search', name: 'app_search')]
-    public function search(PlatRepository $platRepo): Response
+    public function search(PlatRepository $platRepo,Request $request): Response
     {
-        // $plat = $platRepo->findSearch($search);
+        $search = $request->request->get('search');
+        $plat = $platRepo->findSearch($search);
 
         return $this->render('accueil/search.html.twig', [
             'controller_name' => 'AccueilController',
-            // 'plat'=> $plat
+            'plat'=> $plat
         ]);
     }
 }

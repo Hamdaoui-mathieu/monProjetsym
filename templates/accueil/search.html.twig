@@ -2,41 +2,26 @@
 
 {% block body %}
 
-{# <div class="container-fluid">
-    <div class="row">
-        <?php foreach ($tableau_resultats as $plat) : ?>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                <a href="detail_plat.php?id=<?= $plat->id ?>">
-                    <img src="images_the_district/food/<?= $plat->image ?>" class="rounded img-responsive ;" height="250px" width="250px">
-                </a>
-                <br>
-                <br>
-                <p class="cadre"><strong><?= $plat->libelle  ?></strong><br>
+{# <pre>
+    {{ dump(plat) }}
+</pre> #}
 
+<div class="container-fluid">
+    <div class="row">
+        
+        {% for plats in plat %}
+
+            <div class="col afftexton col-lg-4 col-md-4 col-sm-6 col-xs-12 text-center" >
+                <a href="{{path('app_detail_plat', {"libelle" : plats.libelle })}}">
+                    <img class="zoom" src="{{ '/food/' ~ plats.image }}" class="rounded img-responsive;" height="250px" width="250px"> 
+                </a>
+                    <br>
+                    <br>
+                    {{plats.libelle}}
+              
             </div>
-        {# <?php endforeach; ?> 
-    </div>
-</div> #}
+
+        {% endfor %}
 
 
 {% endblock %}
-<!-- <div class="container-fluid"> 
-    <div class="row">
-        <?php foreach ($tableau_resultats2 as $plat) :?>
-            <div class="col-lg-3 col-md-4 col-sm-6 col-xs-12">
-                <a href="detail_plat.php?id=<?= $plat->id ?>">
-                    <img src="images_the_district/food/<?= $plat->image ?>" class="rounded img-responsive ;" height="250px" width="250px">
-                </a>
-                <br>
-                <br>
-                <p class="cadre"><strong><?= $plat->libelle  ?></strong><br>
-
-            </div>
-        <?php endforeach; ?>
-    </div>
-</div>
-
-
-
-<?php include('footer.php'); ?>
-</div-->

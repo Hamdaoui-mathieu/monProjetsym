@@ -1,7 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
+{% if app.user %}
+        <div class="mb-3 float-right">
+            Connecté en tant que {{ app.user.prenom }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+        </div>
+    {% endif %}
+    
 <div class="bg1">
     <form method="post" action={{path('app_search')}} class="float-right" role="search">
         <input class="search" name="search" type="search" placeholder="rechercher" aria-label="Search">
@@ -10,7 +15,9 @@
 </div>
 <br>
 
- 
+ <br><br>
+<h2>Les catégories du moments :</h2>
+<hr><br>
 <div class="container-fluid">
 
   {% for message in app.flashes('success') %}
@@ -26,14 +33,14 @@
              
         {% for categorie in categories %}
 
-            <div class="col afftexton col-lg-4 col-md-4 col-sm-6 col-xs-12" >
+            <div class="col afftexton col-lg-4 col-md-4 col-sm-6 col-xs-12 text-center" >
             <a href="{{path('app_plat_categorie', {"libelle" : categorie.libelle })}}">
                 <img class="zoom" src="{{ '/category/' ~ categorie.image }}" class="rounded img-responsive;" height="250px" width="250px"> 
             </a>
                 <br>
                 <br>
                 {{categorie.libelle}}
-              
+              <br>
             </div>
         {% endfor %}
      
@@ -43,16 +50,17 @@
 
     </div>
 </div>
-
+<br><br>
 <h2>Les plats du moments :</h2>
-<br>
+<hr><br>
+
 <div class="container-fluid">
     <div class="row">
         
         {% for plat in plats %}
 
-            <div class="col afftexton col-lg-4 col-md-4 col-sm-6 col-xs-12" >
-                <a href="{{path('app_detail_plat', {"id" : plat.id })}}">
+            <div class="col afftexton col-lg-4 col-md-4 col-sm-6 col-xs-12 text-center" >
+                <a href="{{path('app_detail_plat', {"libelle" : plat.libelle })}}">
                     <img class="zoom" src="{{ '/food/' ~ plat.image }}" class="rounded img-responsive;" height="250px" width="250px"> 
                 </a>
                     <br>
@@ -60,27 +68,14 @@
                     {{plat.libelle}}
               
             </div>
+
         {% endfor %}
-            <!-- <div class="container-fluid"> -->
 
-            {# <div class="col afftexton col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                <a class='' href="detail_plat.php?id=<?= $categorie->id ?>">
-
-                    <img src="//food/<?= $categorie->image ?>" class="rounded img-responsive" height="255px" width="255px" ;>
-                </a>
-                <br>
-                <br>
-                <div>
-                    <p class="reseaux afftext"><strong><?= $categorie->libelle  ?></strong><br>
-                </div>
-            </div> #}
-            <!-- </div> -->
-
-            <!-- <br> -->
-            <!-- </div> -->
 
     </div>
 </div>
+<br>
+<br>
 <br>
 <br>
 

@@ -12,27 +12,18 @@
 <div class="container-fluid">
     <div class="row">
 
-            {# {% for categorie in categories %}
-
-            <div class="col afftexton col-lg-4 col-md-4 col-sm-6 col-xs-12" >
-            {# <a href="{{path('app_plat_categorie')}}"> #}
-                {# <img class="zoom" src="{{ '/category/' ~ categorie.image }}" class="rounded img-responsive;" height="250px" width="250px"> 
-                </a>
-                <br>
-                <br>
-                {{categorie.libelle}}
-
-            </div>
-
-        {% endfor %}  #}
-
                {% for categorie in categories %}
 
-            <div class="col afftexton col-lg-4 col-md-4 col-sm-6 col-xs-12" >
+            <div class="col afftexton col-lg-4 col-md-4 col-sm-6 col-xs-12 text-center" >
             <a href="{{path('app_plat_categorie', {"libelle" : categorie.libelle })}}">
                 <img class="zoom" src="{{ '/category/' ~ categorie.image }}" class="rounded img-responsive;" height="250px" width="250px"> 
             </a>
                 <br>
+                <br>
+                <form action="commande.html.twig" method="post">
+                <input type="number" name="quantity" id="quantity" min="1" max="100" size="1">
+                <input id="button" name="ajouter" title="Ajouter au panier" class="text-dark a-button-input" type="submit" value="Ajouter au panier">
+                </form>
                 <br>
                 {{categorie.libelle}}
               
