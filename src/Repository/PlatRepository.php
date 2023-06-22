@@ -63,9 +63,9 @@ class PlatRepository extends ServiceEntityRepository
 
         return $this->createQueryBuilder('p')
 
-            ->andwhere('p.libelle like :libelle')
-            ->orWhere('p.description like :description')
-            ->setParameters([':description' => $description, ':libelle' => $libelle])
+             ->andwhere('p.libelle like :libelle')
+             ->orWhere('p.description like :description')
+            ->setParameters([ ':description' => $description,':libelle' => $libelle])
             ->getQuery()
             ->getResult()
             ;
