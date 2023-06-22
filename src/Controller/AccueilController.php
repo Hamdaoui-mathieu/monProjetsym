@@ -153,10 +153,17 @@ class AccueilController extends AbstractController
     {
         $search = $request->request->get('search');
         $plat = $platRepo->findSearch($search);
+        if($plat){
+            $this->addFlash('success', "Votre recherche a retourné " .count($plat). " résultats.");
+        }else{
+            $this->addFlash('warning', "Il n'y a aucun résultat pour votre recherche.");
+            // $message = "Il n'y a aucun résultat pour votre recherche.";
+        }
 
         return $this->render('accueil/search.html.twig', [
             'controller_name' => 'AccueilController',
-            'plat'=> $plat
+            'plat'=> $plat,
+            // 'message' => $message
         ]);
     }
 }
