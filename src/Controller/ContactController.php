@@ -9,6 +9,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\http\Attribute\Isgranted;
 
 // class ContactController extends AbstractController
 // {
@@ -26,9 +27,12 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class ContactController extends AbstractController
 {
+
     #[Route('/contact', name: 'app_contact')]
     public function index(Request $request, EntityManagerInterface $entityManager): Response
     {
+    //    $this->denyAccessUnlessGranted('ROLE_CLIENT');
+
         $form = $this->createForm(ContactFormType::class);
         $form->handleRequest($request);
 
