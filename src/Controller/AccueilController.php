@@ -147,6 +147,15 @@ class AccueilController extends AbstractController
         ]);
     }
 
+    #[Route('/Administration', name:'app_Administration')]
+    public function Administration(): Response
+    {
+        // $this->denyAccessUnlessGranted('ROLE_CLIENT');
+
+        return $this->render('accueil/Administration.html.twig', [
+            'controller_name' => 'AccueilController'
+        ]);
+    }
 
     #[Route('/search', name: 'app_search')]
     public function search(PlatRepository $platRepo,Request $request): Response
