@@ -11,6 +11,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\MoneyField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\ImageField;
 
 class PlatCrudController extends AbstractCrudController
 {
@@ -22,10 +23,10 @@ class PlatCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
-            Idfield::new('id'),
+            IdField::new('id'),
             TextField::new('libelle'),
             TextField::new('description'),
-            TextField::new('image'),
+            ImageField::new('image'),
             TextField::new('prix'),
             AssociationField::new('categorie')
         ];
