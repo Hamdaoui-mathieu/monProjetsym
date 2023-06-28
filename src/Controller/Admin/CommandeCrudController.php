@@ -28,7 +28,8 @@ class CommandeCrudController extends AbstractCrudController
             IdField::new('id'),
             TextField::new('total'),
             ArrayField::new('etat'),
-            DateTimeField::new('date_commande')
+            DateTimeField::new('date_commande'),
+            AssociationField::new('utilisateur')
         ];
     }
     

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller\Admin;
+use App\Entity\Detail;
 use App\Entity\Commande;
 use App\Entity\Categorie;
 use App\Entity\Plat;
@@ -51,5 +52,6 @@ class DashboardController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Catégories', 'fas fa-clipboard-list', Categorie::class);
         yield MenuItem::linkToCrud('Utilisateurs', 'far fa-address-card', Utilisateur::class);
         yield MenuItem::linkToCrud('Commandes', 'fas fa-shipping-fast', Commande::class);
+        yield MenuItem::LinkToCrud('Details', 'fas fa-clipboard-list', Detail::class);
     }
-}
+} 

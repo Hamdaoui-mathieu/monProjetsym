@@ -26,8 +26,10 @@ class PlatCrudController extends AbstractCrudController
             IdField::new('id'),
             TextField::new('libelle'),
             TextField::new('description'),
-            ImageField::new('image'),
-            TextField::new('prix'),
+            ImageField::new('image')
+                ->setBasePath('/food')
+                ->setUploadDir('public/food'),
+            MoneyField::new('prix')->setCurrency('EUR'),
             AssociationField::new('categorie')
         ];
     }
