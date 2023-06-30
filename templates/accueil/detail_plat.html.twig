@@ -13,7 +13,7 @@
 
             <div class="col-sm-6">
                <div class="col afftexton col-lg-4 col-md-4 col-sm-6 col-xs-12" >
-                <img class="zoom" src="{{ '/food/' ~ plat.image }}" class="rounded img-responsive;" height="250px" width="250px"> 
+                <img class="zoom" src="{{ '/food/' ~ plat.image }}" class="rounded img-responsive;" height="250px" width="250px"  <td></td>> 
                 <br>
                 <br>
                 {{plat.libelle}}<br>
@@ -22,10 +22,10 @@
                 {{plat.prix}}<br>
                   <br>
                 <br>
-                 <form action="commande.html.twig" method="post">
+                 <a href="{{ path('app_ajout_panier', {"id" : plat.id }) }}">
                 <input type="number" name="quantity" id="quantity" min="1" max="100" size="1">
                 <input id="button" name="ajouter" title="Ajouter au panier" class="text-dark a-button-input" type="submit" value="Ajouter au panier">
-                </form> 
+                </a> 
             
             </div><br><br><br>
         {# {% endfor %} #}
