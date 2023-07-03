@@ -9,36 +9,58 @@
 	</div>
 
 	{% if items | length > 0 %}
-		<table class="table">
+		<table class="container  table">
 			<thead>
 				<tr>
 					<th>Produit</th>
+                    <th>Image</th>
 					<th>Prix</th>
 					<th>Quantité</th>
 					<th>Total</th>
-					<th></th>
+					
+                    <th></th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for item in items %}
 					<tr>
 						<td>{{ item.plat.libelle}}</td>
+                        <td> <img class="" src="{{ '/food/' ~ item.plat.image }}" class=" rounded img-responsive;" height="50px" width="50px"> </td>
 						<td>{{ item.plat.prix}}</td>
 						<td>{{item.quantite}}</td>
-						<td>{{ item.plat.prix * item.quantite}}</td>
-						<td>
-							<a href="#" class="btn btn-danger btn-sm"> 
+						
+                        <td>{{ item.plat.prix * item.quantite}}</td>
+                        <td>
+							<a href="{{ path('app_ajout_panier', {"id" : item.plat.id }) }}" class=" btn btn-success btn-sm">Ajouter
+								<i class="fas fa-trash"></i>
+                                </a>
+
+						</td>
+                          <td>
+							<a href="{{ path('app_remove_plat', {"id" : item.plat.id }) }}" class="btn btn-warning btn-sm">Retirer
+								<i class="fas fa-trash"></i>
+                                </a>
+
+        <td>
+							<a href="{{ path('app_delete_plat', {"id" : item.plat.id }) }}" class="btn btn-danger btn-sm">Supprimer
 								<i class="fas fa-trash"></i>
                                 </a>
 						</td>
 					</tr>
 				{% endfor %}
 			</tbody>
-			<tfoot>
+			<tfoot >
 				<tr>
-					<td colspan="3">Total :</td>
+					<td colspan="4">Total :</td>
 					<td>{{ total }}</td>
-					<td></td>
+					  <td></td>
+                      <td></td>
+                      <td>
+							<a href="#" class="btn btn-danger btn-sm">Vider panier
+								<i class="fas fa-trash"></i>
+                                </a>
+
+						</td>
 				</tr>
 			</tfoot>
 		</table>
