@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Plat;
 use App\Repository\PlatRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -43,11 +44,19 @@ class PanierController extends AbstractController
             $totalItem = $item['plat']->getPrix() * $item['quantite'];
             $total += $totalItem;
         }
+
+
+        $cookie = new Cookie("nom du cookie", json_encode($panier), strtotime('tomorrow'));
+        $res = new Response();
+        $res->headers->setcookie($cookie);
+        $res->send();
+
         return $this->render('panier/panier.html.twig', [
             'items' => $paniertotal,
             'total' => $total
         ]);
 
+// Ajouter de la quantité
 
     }
     #[Route('/ajout_panier/{id}', name: 'app_ajout_panier')]
