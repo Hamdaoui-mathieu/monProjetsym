@@ -24,10 +24,13 @@ class RegistrationController extends AbstractController
     {
         $this->emailVerifier = $emailVerifier;
     }
+    
+
 
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
+    
         $user = new Utilisateur();
         $user->setRoles(['ROLE_USER']);
         
@@ -83,5 +86,14 @@ class RegistrationController extends AbstractController
         $this->addFlash('success', 'Votre adresse Email a bien été vérifié.');
 
         return $this->redirectToRoute('app_register');
+    }
+
+
+    #[route('/infos_account', name: 'app_infos_account')]
+    public function modificateAccount():response
+    {
+        return $this->render('registration/infos_account.html.twig', [
+                'controller_name'=> 'RegistrationController,'
+    ]);
     }
 }

@@ -1,0 +1,41 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+
+<h1 class="text-center">Vos informations de compte </h1>
+<hr>
+
+{# <pre>
+    {{ dump(user) }}
+</pre> #}
+<div class="float-right">
+
+<a href="{{ path('app_logout') }}" style="color:red">Déconnexion</a>
+
+</div>
+<br>
+<div class=" text-center" >
+
+<br>
+{{user.nom}}
+<br>
+{{user.prenom}}
+<br>
+{{user.email}}
+<br>
+{{user.adresse}}
+<br>
+{{user.cp}}
+<br>
+{{user.ville}}
+<br>
+{{user.telephone}}
+
+
+
+</div>
+<br>
+<hr>
+
+
+{% endblock %}

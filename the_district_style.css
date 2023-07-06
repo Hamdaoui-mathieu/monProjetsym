@@ -26,6 +26,10 @@
     padding: 7%;
 }
 
+.info{
+    font-size: xx-large;
+    
+}
 .zoom:hover{
     -ms-transform: scale(0.8); /* IE 9 */
     -webkit-transform: scale(0.8); ; /* Safari 3-8 */

@@ -58,4 +58,5 @@ class RegistrationFormType extends AbstractType
             'data_class' => Utilisateur::class,
         ]);
     }
+
 }
