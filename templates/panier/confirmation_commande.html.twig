@@ -1,0 +1,13 @@
+<h1>Confirmation de votre commande!</h1>
+
+<p>
+    Veuillez cliquez sur ce lien pour valider votre commande: 
+    <br>
+    <br>
+    <a href="{{ signedUrl|raw }}">Confirmation de commande</a>.
+    Ce lien expire dans {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
+</p>
+
+<p>
+   Merci pour votre visite!!
+</p>
