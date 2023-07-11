@@ -2,45 +2,45 @@
 
 {% block body %}
 
-<h1 class="text-center">Vos informations de compte </h1>
-<hr>
+	<h1 class="text-center">Vos informations de compte
+	</h1>
+	<hr>
 
-{# <pre>
-    {{ dump(user) }}
-</pre> #}
-<div class="float-right">
+	{# <pre>
+	    {{ dump(user) }}
+	</pre> #}
+	<div class="float-right">
 
-<a href="{{ path('app_logout') }}" style="color:red">Déconnexion</a>
+		<a href="{{ path('app_logout') }}" style="color:red">Déconnexion</a>
 
-</div>
-<br>
-<div class=" text-center fs-4 secondary-link " >
+	</div>
+	<br>
+	<div class=" text-center fs-4 secondary-link ">
 
-<br>
-{{user.nom}}
-<br>
-{{user.prenom}}
-<br>
-{{user.email}}
-<br>
-{{user.adresse}}
-<br>
-{{user.cp}}
-<br>
-{{user.ville}}
-<br>
-{{user.telephone}}
+		<br>
+		{{user.nom}}
+		<br>
+		{{user.prenom}}
+		<br>
+		{{user.email}}
+		<br>
+		{{user.adresse}}
+		<br>
+		{{user.cp}}
+		<br>
+		{{user.ville}}
+		<br>
+		{{user.telephone}}
 
 
+	</div>
+	<div>
 
-</div>
-<div>
+		<a href="{{ path('app_logout') }}" style="color:red">Suppression de compte</a>
 
-<a href="{{ path('app_logout') }}" style="color:red">Suppression de compte</a>
-
-</div>
-<br>
-<hr>
+	</div>
+	<br>
+	<hr>
 
 
 {% endblock %}
