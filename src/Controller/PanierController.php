@@ -10,11 +10,13 @@ use App\Repository\UtilisateurRepository;
 use App\Service\PanierService;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Cookie;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
 
 class PanierController extends AbstractController
@@ -138,7 +140,12 @@ public function remove_plat(Plat $plat)
 
         
            }
-          
+           $email = (new TemplatedEmail())
+
+           ->from(new Address('thedistrict@afpa.fr', 'theDistrict'))
+           ->to($vraiUser->getEmail())
+           ->subject('Récapitulatif de votre commande')
+           ->htmlTemplate('panier/confirmation_commande.html.twig');
 
 
         $this->em->flush();
