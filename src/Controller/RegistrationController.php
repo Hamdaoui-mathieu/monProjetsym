@@ -24,10 +24,13 @@ class RegistrationController extends AbstractController
     {
         $this->emailVerifier = $emailVerifier;
     }
+    
+
 
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
     {
+    
         $user = new Utilisateur();
         $user->setRoles(['ROLE_USER']);
         
@@ -84,4 +87,43 @@ class RegistrationController extends AbstractController
 
         return $this->redirectToRoute('app_register');
     }
+
+
+    #[route('/info_account', name: 'app_infos_account')]
+    public function modificateAccount():response
+    {
+        return $this->render('registration/infos_account.html.twig', [
+                'controller_name'=> 'RegistrationController,'
+    ]);
+    }
+
+    // #[route('/modificate_account', name: 'app_modificate_account')]
+    // public function modificateAccount(Request $request, UserPasswordHasherInterface $userPasswordHasher):response
+    // {
+    //     $user = $this->getUser();
+    //     $form = $this->createForm(EditUserFormType::class, $user);
+    //     $form->handleRequest($request);
+
+    //     if($form->isSubmitted() && $form->isValid()){
+
+    //         $em = $this->getDoctrine()->getManager();
+    //         $newPassword = $form->get('plainPassword')['first']->getData();
+
+    //         // Grâce au service, on génère un nouveau hash de notre nouveau mot de pase 
+    //         $hashOfNewPassword = $userPasswordHasher->hashPassword($user, $newPassword);
+
+    //         //On change l'ancien mt de passe hashé par le nouveau que l'on a généré juste au dessus
+    //         $user->setPassword($hashOfNewPassword);
+
+    //         $em->flush();
+
+    //         $this->addFlash('success', 'Profil modifié avec succès.');
+    //         return $this->redirectToRoute('app_infos_account');
+
+    //     }
+
+    //     return $this->render('registration/infos_account.html.twig', [
+    //             'controller_name'=> 'RegistrationController,'
+    // ]);
+    // }
 }

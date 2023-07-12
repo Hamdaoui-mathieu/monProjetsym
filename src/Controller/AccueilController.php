@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Form\ContactFormType;
 use App\Entity\Plat;
 use App\Entity\Categorie;
+use App\Entity\Utilisateur;
 use App\Repository\PlatRepository;
 use App\Repository\CategorieRepository;
 use App\Repository\CommandeRepository;
@@ -14,8 +15,10 @@ use App\Repository\UtilisateurRepository;
 use Egulias\EmailValidator\Result\Reason\DetailedReason;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+
 
 
 
@@ -66,7 +69,7 @@ class AccueilController extends AbstractController
         // $plats = $platRepo->findAll();
         $categories = $this->categorieRepo->findAll();
 
-        return $this->render('accueil/categorie.html.twig', [
+        return $this->render('categorie/index.html.twig', [
             'controller_name' => 'AccueilController',
             // 'plats' => $plats,
             'categories' => $categories
@@ -79,7 +82,7 @@ class AccueilController extends AbstractController
     {
         $plats = $this->platRepo->findAll();
 
-        return $this->render('accueil/plat.html.twig', [
+        return $this->render('plat/index.html.twig', [
             'controller_name' => 'AccueilController',
             'plats' => $plats
         ]);
@@ -103,13 +106,29 @@ class AccueilController extends AbstractController
         ]);
     }
 
+    #[Route('/infos_account', name: 'app_info_account')]
+    
+    public function info_account( Security $security): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        $usertest = $security->getUser();
+
+        
+        
+        // $user = $this->utilisateurRepo ->find($id);
+        
+        return $this->render('registration/infos_account.html.twig', [
+        'controller_name' => 'AccueilController',
+        'user' => $usertest
+        ]);
+    }
 
     #[Route('/detail_plat/{libelle}', name: 'app_detail_plat')]
     public function detail_plat(Plat $id): Response
     {
         $plat = $this->platRepo->find($id);
 
-        return $this->render('accueil/detail_plat.html.twig', [
+        return $this->render('plat/detail_plat.html.twig', [
             'controller_name' => 'AccueilController',
             'plat' => $plat
         ]);
@@ -122,7 +141,7 @@ class AccueilController extends AbstractController
         $plat = $this->platRepo->findAll();
         $idcat = $this->categorieRepo->find($id);
 
-        return $this->render('accueil/plat_categorie.html.twig', [
+        return $this->render('categorie/plat_categorie.html.twig', [
             'controller_name' => 'AccueilController',
             'plat' => $plat,
             'idcat' => $idcat

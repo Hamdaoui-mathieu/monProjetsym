@@ -8,8 +8,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Mailer\MailerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\http\Attribute\Isgranted;
+use App\Service\MailService;
 
 // class ContactController extends AbstractController
 // {
@@ -29,7 +31,7 @@ class ContactController extends AbstractController
 {
 
     #[Route('/contact', name: 'app_contact')]
-    public function index(Request $request, EntityManagerInterface $entityManager): Response
+    public function index(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer, MailService $ms): Response
     {
     //   $this->denyAccessUnlessGranted('ROLE_CLIENT');
 
@@ -47,6 +49,15 @@ class ContactController extends AbstractController
             // dd($message);
             $entityManager->persist($message);
             $entityManager->flush();
+
+            $expediteur = $message->getEmail();
+            $destinataire = 'admin@the_district.fr';
+            $sujet = $message->getObjet();
+            $message = $message->getMessage();
+
+               //envoi de mail avec notre service MailService
+               $email = $ms->sendMail($expediteur, $destinataire, $sujet, $message);
+               //            dd($message->getEmail());
 
             //Redirection vers accueil
             $this->addFlash('success', 'Message envoyé!');
