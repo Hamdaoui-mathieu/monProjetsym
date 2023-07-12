@@ -148,6 +148,7 @@ public function remove_plat(Plat $plat)
            ->htmlTemplate('panier/confirmation_commande.html.twig');
 
 
+
         $this->em->flush();
         $session = $this->requestStack->getSession();   
         $session->remove('panier');
