@@ -27,8 +27,25 @@ class MailService
             ->subject($sujet)
             ->text($message);
         // $mailer->send($email);
+
+
         $this->mailer->send($email);
     }
+
+
+
+//  public function sendMailCommande($expediteur, $destinataire, $sujet, $message)
+//     {
+//         $email = (new Email())
+//             ->from($expediteur)
+//             ->to($destinataire)
+//             ->subject($sujet)
+//             ->text($message);
+//         // $mailer->send($email);
+
+        
+//         $this->mailer->send($email);
+//     }
 
     //On se sert du parameterBag et du nom du paramètre ('image_directory') pour récupèrer le chemin du dossier "images"
     // $dossiers_images = $this->paramBag->get('images_directory');

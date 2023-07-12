@@ -2,6 +2,10 @@
 
 namespace App\Controller;
 
+use App\Entity\Utilisateur;
+use Symfony\Component\Mime\Email;
+use Symfony\Component\Mailer\MailerInterface;
+use App\Controller\MailService;
 use App\Entity\Commande;
 use App\Entity\Detail;
 use App\Entity\Plat;
@@ -18,7 +22,6 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
-use App\Service\MailService;
 
 class PanierController extends AbstractController
 {
@@ -28,7 +31,7 @@ class PanierController extends AbstractController
     private $em;
     private $ps;
 
-    public function __construct(RequestStack $requestStack, MailService $ms,PlatRepository $PlatRepository, EntityManagerInterface $em, PanierService $ps)
+    public function __construct(RequestStack $requestStack, PlatRepository $PlatRepository, EntityManagerInterface $em, PanierService $ps)
     {
         $this->requestStack = $requestStack;
         $this->PlatRepository = $PlatRepository;
@@ -108,15 +111,23 @@ public function remove_plat(Plat $plat)
 
 
     #[route('/valider_panier', name:'app_valider_panier')]
-    public function validerAllItems(Request $request, UtilisateurRepository $userRepo)
+    public function validerAllItems(Request $request, UtilisateurRepository $userRepo,  MailerInterface $mi)
     {
-       
+        $nom = $request->request->get('nom');
+        $prenom = $request->request->get('prenom');
+        $adresse = $request->request->get('adresse');
+        $cp = $request->request->get('cp');
+        $ville = $request->request->get('ville');
+        $email= $request->request->get('email');
+
+
+
         $userMail = $this->getUser()->getUserIdentifier();
         $vraiUser = $userRepo->findOneBy(["email"=> $userMail]);
 
-       $panierTotal = $this->ps->panier();
 
-       
+
+       $panierTotal = $this->ps->panier();
        $total = $this->ps->getTotal();
 
     //    dd($panierTotal, $total);
@@ -141,16 +152,43 @@ public function remove_plat(Plat $plat)
 
         
            }
-        //    $email = (new TemplatedEmail())
-
-        //    ->from(new Address('thedistrict@afpa.fr', 'theDistrict'))
-        //    ->to($vraiUser->getEmail())
-        //    ->subject('Récapitulatif de votre commande')
-        //    ->htmlTemplate('panier/confirmation_commande.html.twig');
-
 
         $this->em->flush();
         $session = $this->requestStack->getSession();   
+
+ //envoi ver service
+
+
+                $expediteur = 'the_district@contact.fr';
+                $destinataire = $userMail;
+                $sujet = 'Commande detail';
+           
+                $email = (new TemplatedEmail())
+                    ->from($expediteur)
+                    ->to($destinataire)
+                    ->subject($sujet)
+
+
+                    ->htmlTemplate('panier/confirmation_commande.html.twig')
+
+                    ->context([
+//les variable que j'evnoi dan le template ex {{panier.libelle}}{{panier.prix}}{{panier.qte}}
+                        'panier' => $panierTotal,
+                        'nom' => $nom,
+                        'prenom' => $prenom,
+                        'adresse' => $adresse,
+                        // 'pay' => $pay,
+                        'cp' => $cp,
+                        'ville' => $ville,
+                        // 'prix_total'=>$get
+
+                        ]);
+
+                $mi->send($email);
+
+                $session = $this->requestStack->getSession();
+
+//
         $session->remove('panier');
 
 
@@ -158,3 +196,5 @@ public function remove_plat(Plat $plat)
     
     }
 }
+// $message = app.user.anme . session[panier] . prix total
+// sendMail($expediteur, $destinataire, $sujet, $message)
