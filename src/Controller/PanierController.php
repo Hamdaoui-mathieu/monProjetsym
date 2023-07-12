@@ -18,6 +18,7 @@ use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\Routing\Annotation\Route;
+use App\Service\MailService;
 
 class PanierController extends AbstractController
 {
@@ -27,7 +28,7 @@ class PanierController extends AbstractController
     private $em;
     private $ps;
 
-    public function __construct(RequestStack $requestStack, PlatRepository $PlatRepository, EntityManagerInterface $em, PanierService $ps)
+    public function __construct(RequestStack $requestStack, MailService $ms,PlatRepository $PlatRepository, EntityManagerInterface $em, PanierService $ps)
     {
         $this->requestStack = $requestStack;
         $this->PlatRepository = $PlatRepository;
@@ -140,13 +141,12 @@ public function remove_plat(Plat $plat)
 
         
            }
-           $email = (new TemplatedEmail())
+        //    $email = (new TemplatedEmail())
 
-           ->from(new Address('thedistrict@afpa.fr', 'theDistrict'))
-           ->to($vraiUser->getEmail())
-           ->subject('Récapitulatif de votre commande')
-           ->htmlTemplate('panier/confirmation_commande.html.twig');
-
+        //    ->from(new Address('thedistrict@afpa.fr', 'theDistrict'))
+        //    ->to($vraiUser->getEmail())
+        //    ->subject('Récapitulatif de votre commande')
+        //    ->htmlTemplate('panier/confirmation_commande.html.twig');
 
 
         $this->em->flush();
