@@ -1,5 +1,7 @@
 <?php
 
+juste un trait_exists
+
 namespace App\Controller;
 
 use App\Entity\Utilisateur;
