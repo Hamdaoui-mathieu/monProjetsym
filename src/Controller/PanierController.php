@@ -116,12 +116,12 @@ public function remove_plat(Plat $plat)
     #[route('/valider_panier', name:'app_valider_panier')]
     public function validerAllItems(Request $request, UtilisateurRepository $userRepo,  MailerInterface $mi)
     {
-        $nom = $request->request->get('nom');
-        $prenom = $request->request->get('prenom');
-        $adresse = $request->request->get('adresse');
-        $cp = $request->request->get('cp');
-        $ville = $request->request->get('ville');
-        $email= $request->request->get('email');
+        // $nom = $request->request->get('nom');
+        // $prenom = $request->request->get('prenom');
+        // $adresse = $request->request->get('adresse');
+        // $cp = $request->request->get('cp');
+        // $ville = $request->request->get('ville');
+        // $email= $request->request->get('email');
 
 
 
@@ -163,9 +163,12 @@ public function remove_plat(Plat $plat)
 
 
                 $expediteur = 'the_district@contact.fr';
-                $destinataire = $userMail;
+                $destinataire = $vraiUser->getEmail();
                 $sujet = 'Commande detail';
+
+                $lignes_details = $cmd->getDetails()->getValues();
            
+
                 $email = (new TemplatedEmail())
                     ->from($expediteur)
                     ->to($destinataire)
@@ -176,14 +179,12 @@ public function remove_plat(Plat $plat)
 
                     ->context([
 //les variable que j'evnoi dan le template ex {{panier.libelle}}{{panier.prix}}{{panier.qte}}
-                        'panier' => $panierTotal,
-                        'nom' => $nom,
-                        'prenom' => $prenom,
-                        'adresse' => $adresse,
-                        // 'pay' => $pay,
-                        'cp' => $cp,
-                        'ville' => $ville,
+                        
+                        'commande' => $cmd,
+                        'details'=> $lignes_details,
+                        'user'=> $vraiUser
                         // 'prix_total'=>$get
+                        
 
                         ]);
 

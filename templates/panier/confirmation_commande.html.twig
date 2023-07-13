@@ -1,8 +1,26 @@
 <h1>Confirmation de votre commande!</h1>
 
+
+{# Bonjour, {{ user.prenom}}, #}
+Votre commande du {{ commande.dateCommande | date('Y-m-d')}} : 
+<p>Total : {{commande.total}} euros</p>
+<p>Plats commandés : </p>
+
+
+{% for detail in details %}
+<div>{{detail.plat.libelle}}</div>
+{# 
+<span>{{detail.plat.libelle}} - Prix : {{detail.plat.prix}} Quantité : {{detail.quantite}}</span> #}
+
+
+{% endfor %}
+
+
+
 <p>
-    Veuillez cliquez sur ce lien pour valider votre commande: 
+
     <br>
+
     <br>
     
 </p>

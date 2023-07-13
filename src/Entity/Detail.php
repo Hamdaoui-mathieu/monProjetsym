@@ -16,10 +16,10 @@ class Detail
     #[ORM\Column]
     private ?int $quantite = null;
 
-    #[ORM\ManyToOne(inversedBy: 'details')]
+    #[ORM\ManyToOne(inversedBy: 'details', fetch:"EAGER")]
     private ?Plat $plat = null;
 
-    #[ORM\ManyToOne(inversedBy: 'details')]
+    #[ORM\ManyToOne(inversedBy: 'details', fetch:"EAGER")]
     private ?Commande $commande = null;
 
     
