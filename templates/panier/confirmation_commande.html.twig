@@ -1,21 +1,29 @@
 <h1>Confirmation de votre commande!</h1>
 
 
-{# Bonjour, {{ user.prenom}}, #}
-Votre commande du {{ commande.dateCommande | date('Y-m-d')}} : 
-<p>Total : {{commande.total}} euros</p>
+Bonjour, {{ user.prenom}},
+<br>
+Voici le récapitulatif de votre commande du {{ commande.dateCommande | date('d-m-Y')}} : 
+
 <p>Plats commandés : </p>
 
 
 {% for detail in details %}
-<div>{{detail.plat.libelle}}</div>
-{# 
-<span>{{detail.plat.libelle}} - Prix : {{detail.plat.prix}} Quantité : {{detail.quantite}}</span> #}
+
+<div>
+
+<p>{{detail.quantite}} {{detail.plat.libelle}}
+<br>
+<br>
+<div>
+ <img src="{{ email.image('@images/food/' ~ detail.plat.image) }}" alt="Logo" >
+</div>
+</div>
 
 
 {% endfor %}
-
-
+<br>
+<p>Total de votre commande: {{commande.total}} euros</p>
 
 <p>
 

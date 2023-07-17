@@ -12,6 +12,7 @@ use App\Controller\MailService;
 use App\Entity\Commande;
 use App\Entity\Detail;
 use App\Entity\Plat;
+use App\Repository\DetailRepository;
 use App\Repository\PlatRepository;
 use App\Repository\UtilisateurRepository;
 use App\Service\PanierService;
@@ -114,7 +115,7 @@ public function remove_plat(Plat $plat)
 
 
     #[route('/valider_panier', name:'app_valider_panier')]
-    public function validerAllItems(Request $request, UtilisateurRepository $userRepo,  MailerInterface $mi)
+    public function validerAllItems(Request $request, UtilisateurRepository $userRepo,  MailerInterface $mi, DetailRepository $dr)
     {
         // $nom = $request->request->get('nom');
         // $prenom = $request->request->get('prenom');
@@ -157,16 +158,18 @@ public function remove_plat(Plat $plat)
            }
 
         $this->em->flush();
+
         $session = $this->requestStack->getSession();   
 
- //envoi ver service
+ //envoi vers service
 
 
                 $expediteur = 'the_district@contact.fr';
                 $destinataire = $vraiUser->getEmail();
                 $sujet = 'Commande detail';
 
-                $lignes_details = $cmd->getDetails()->getValues();
+                // $lignes_details = $cmd->getDetails()->getValues();
+                $lignes_details = $dr->findBy(["commande"=>$cmd->getId()]);
            
 
                 $email = (new TemplatedEmail())
@@ -178,7 +181,7 @@ public function remove_plat(Plat $plat)
                     ->htmlTemplate('panier/confirmation_commande.html.twig')
 
                     ->context([
-//les variable que j'evnoi dan le template ex {{panier.libelle}}{{panier.prix}}{{panier.qte}}
+//les variable que j'envoi dans le template ex {{panier.libelle}}{{panier.prix}}{{panier.qte}}
                         
                         'commande' => $cmd,
                         'details'=> $lignes_details,
@@ -195,8 +198,10 @@ public function remove_plat(Plat $plat)
 //
         $session->remove('panier');
 
+   //Redirection vers accueil
+            $this->addFlash('success', 'Un récapitulatif de votre comande a été envoyé sur votre messagerie! Pensez à consultez vos spams.',);
 
-        return $this->redirectToRoute('app_panier');
+        return $this->redirectToRoute('app_accueil',);
     
     }
 }

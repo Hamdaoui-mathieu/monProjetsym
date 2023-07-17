@@ -15,7 +15,13 @@
 </div>
 <br>
 
- <br><br>
+ <br>
+   {% for message in app.flashes('success') %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+<br>
 <h2>Les catégories du moments :</h2>
 <hr><br>
 <div class="container-fluid">
