@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Utilisateur;
 use App\Form\RegistrationFormType;
+use App\Repository\UtilisateurRepository;
 use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
@@ -19,13 +20,14 @@ use SymfonyCasts\Bundle\VerifyEmail\Exception\VerifyEmailExceptionInterface;
 class RegistrationController extends AbstractController
 {
     private EmailVerifier $emailVerifier;
+    private $utilisateurRepo;
 
-    public function __construct(EmailVerifier $emailVerifier)
+    public function __construct(EmailVerifier $emailVerifier, UtilisateurRepository $utilisateurRepo)
     {
         $this->emailVerifier = $emailVerifier;
+        $this->utilisateurRepo = $utilisateurRepo;
     }
     
-
 
     #[Route('/register', name: 'app_register')]
     public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
@@ -92,8 +94,12 @@ class RegistrationController extends AbstractController
     #[route('/info_account', name: 'app_infos_account')]
     public function modificateAccount():response
     {
+        $user = $this->getUser();
+ 
         return $this->render('registration/infos_account.html.twig', [
-                'controller_name'=> 'RegistrationController,'
+                'controller_name'=> 'RegistrationController',
+                "user" => $user
+
     ]);
     }
 

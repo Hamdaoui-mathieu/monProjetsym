@@ -3,7 +3,8 @@
 {% block body %}
 {% if is_granted("ROLE_USER") %}
         <div class="mb-3 float-right">
-            Connecté en tant que {{ app.user.prenom }}, <a href="{{ path('app_logout') }}">Déconnexion</a>
+            Connecté en tant que {{ app.user.prenom }}
+            {# <a href="{{ path('app_logout') }}">Déconnexion</a> #}
         </div>
     {% endif %}
     
@@ -17,7 +18,7 @@
 
  <br>
    {% for message in app.flashes('success') %}
-            <div class="alert alert-success">
+            <div class="alert alert-success " id="alert-div">
                 {{ message }}
             </div>
         {% endfor %}
@@ -27,7 +28,7 @@
 <div class="container-fluid">
 
   {% for message in app.flashes('success') %}
-            <div class="alert alert-success">
+            <div class="alert alert-success alert-div">
                 {{ message }}
             </div>
         {% endfor %}
@@ -84,6 +85,49 @@
 <br>
 <br>
 <br>
+<script>
+// $(document).ready(function() {
+//     setTimeout(function(){
+//         //$('#alert-div').remove();
+//         $('#alert-div').attr("hidden",true);
+//         console.log('je suis dans la function')
+//         }, 1000);
+// });
+</script>
+{% endblock %}
+{% block javascripts %}
+<script>
+
+// const delitemps = () => {
+//     $('#alert-div').attr("hidden",true);
+//         console.log('je suis dans la function')
+// }
+// delitemps();
+$(document).ready(function() {
+    setTimeout(function(){
+        //$('#alert-div').remove();
+        $('#alert-div').attr("hidden",true);
+        console.log('je suis dans la function')
+        }, 1000);
+});
+
+// var cpt = 10;
+//     timer = setInterval(function(){
+//         if(cpt>0) // si on a pas encore atteint la fin
+//         {
+//             --cpt;
+//         }
+//         else // Si on atteint la fin du timer
+//         {
+//             var doc = document.getElementsByClassName('.alert-div');
+//             doc.hidden = true;
+//             clearInterval(timer);
+//         }
+//     }, 500);
+
+
+
+</script>
 
 {% endblock %}
 
