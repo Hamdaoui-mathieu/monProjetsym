@@ -7,10 +7,9 @@ Voici le récapitulatif de votre commande du {{ commande.dateCommande | date('d-
 
 <p>Plats commandés : </p>
 
-
 {% for detail in details %}
 
-<div>
+<div class="col-3">
 
 <p>{{detail.quantite}} {{detail.plat.libelle}}
 <br>
@@ -34,5 +33,5 @@ Voici le récapitulatif de votre commande du {{ commande.dateCommande | date('d-
 </p>
 
 <p>
-   Merci pour votre visite!!
+   Merci pour votre visite et à bientôt!!
 </p>

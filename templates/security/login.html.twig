@@ -3,6 +3,7 @@
 {% block title %}Log in!{% endblock %}
 
 {% block body %}
+
 <form method="post">
     {% if error %}
         <div class="alert alert-danger">Identifiant et/ou mot de passe incorrect!</div>
@@ -13,6 +14,13 @@
             Connecté en tant que {{ app.user.userIdentifier }}, <a href="{{ path('app_logout') }}">Logout</a>
         </div>
     {% endif %}
+
+       {% for message in app.flashes('success2') %}
+            <div class="alert alert-success " id="alert-div">
+                {{ message }}
+            </div>
+        {% endfor %}
+        
 <div class="float-right">
 <p >Pas encore de compte? C'est <a class="text-success" href="{{path('app_register')}}">par ici!!</a></p>
 </div>
@@ -24,9 +32,7 @@
     <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
 
     <input type="hidden" name="_csrf_token"
-           value="{{ csrf_token('authenticate') }}"
-    >
-'
+           value="{{ csrf_token('authenticate') }}">'
 
 
     {#
@@ -44,4 +50,41 @@
         Connexion
     </button>
 </form>
+{% endblock %}
+
+{% block javascripts %}
+<script>
+
+// const delitemps = () => {
+//     $('#alert-div').attr("hidden",true);
+//         console.log('je suis dans la function')
+// }
+// delitemps();
+$(document).ready(function() {
+    setTimeout(function(){
+        //$('#alert-div').remove();
+        $('#alert-div').attr("hidden",true);
+        // console.log('je suis dans la function')
+        }, 2000);
+});
+
+// var cpt = 10;
+//     timer = setInterval(function(){
+//         if(cpt>0) // si on a pas encore atteint la fin
+//         {
+//             --cpt;
+//         }
+//         else // Si on atteint la fin du timer
+//         {
+//             var doc = document.getElementsByClassName('.alert-div');
+//             doc.hidden = true;
+//             clearInterval(timer);
+//         }
+//     }, 500);
+
+
+
+</script>
+
+
 {% endblock %}

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controller;
+
 use App\Entity\Contact;
 use App\Form\DemoFormType;
 use App\Form\ContactFormType;
@@ -33,7 +34,7 @@ class ContactController extends AbstractController
     #[Route('/contact', name: 'app_contact')]
     public function index(Request $request, EntityManagerInterface $entityManager, MailerInterface $mailer, MailService $ms): Response
     {
-    //   $this->denyAccessUnlessGranted('ROLE_CLIENT');
+        //   $this->denyAccessUnlessGranted('ROLE_CLIENT');
 
         $form = $this->createForm(ContactFormType::class);
         $form->handleRequest($request);
@@ -55,16 +56,16 @@ class ContactController extends AbstractController
             $sujet = $message->getObjet();
             $message = $message->getMessage();
 
-               //envoi de mail avec notre service MailService
-               $email = $ms->sendMail($expediteur, $destinataire, $sujet, $message);
-               //            dd($message->getEmail());
+            //envoi de mail avec notre service MailService
+            $email = $ms->sendMail($expediteur, $destinataire, $sujet, $message);
+            //            dd($message->getEmail());
 
             //Redirection vers accueil
-            $this->addFlash('success', 'Message envoyé!');
+            $this->addFlash('success', 'Votre message a bien été envoyer!');
 
             return $this->redirectToRoute('app_accueil');
         }
-    
+
         return $this->render('contact/index.html.twig', [
             // 'form' => $form->createView(),
             'form' => $form

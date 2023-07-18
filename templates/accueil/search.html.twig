@@ -1,7 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
+   
 {# <pre>
     {{ dump(plat) }}
 </pre> #}
@@ -11,10 +11,10 @@
         <div class="alert alert-info">{{ message }}</div>
     {% endif %} #}
    {% for message_ok in app.flashes('success') %}
-		<div class="alert alert-success" role="alert">{{ message_ok }}</div>
+		<div class="alert alert-success" role="alert" id="info_search">{{ message_ok }}</div>
 	{% endfor %}
     {% for message_ko in app.flashes('warning') %}
-		<div class="alert alert-warning" role="alert">{{ message_ko }}</div>
+		<div class="alert alert-warning" role="alert" id="info_search">{{ message_ko }}</div>
 	{% endfor %}
 
 <div class="float-right">
@@ -38,5 +38,21 @@
 
         {% endfor %}
 
+
+{% endblock %}
+
+{% block javascripts %}
+<script>
+
+
+$(document).ready(function() {
+    setTimeout(function(){
+        //$('#alert-div').remove();
+        $('#info_search').attr("hidden",true);
+        // console.log('je suis dans la function')
+        }, 2000);
+});
+
+</script>
 
 {% endblock %}

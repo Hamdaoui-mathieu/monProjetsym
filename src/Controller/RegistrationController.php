@@ -10,6 +10,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Mime\Address;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -21,11 +22,14 @@ class RegistrationController extends AbstractController
 {
     private EmailVerifier $emailVerifier;
     private $utilisateurRepo;
+    private $requestStack;
 
-    public function __construct(EmailVerifier $emailVerifier, UtilisateurRepository $utilisateurRepo)
+    public function __construct(EmailVerifier $emailVerifier, RequestStack $requestStack,UtilisateurRepository $utilisateurRepo)
     {
         $this->emailVerifier = $emailVerifier;
         $this->utilisateurRepo = $utilisateurRepo;
+        $this->requestStack = $requestStack;
+        
     }
     
 
@@ -61,8 +65,10 @@ class RegistrationController extends AbstractController
                     ->htmlTemplate('registration/confirmation_email.html.twig')
             );
             // do anything else you need here, like send an email
+            
+        $this->addflash('success2', 'Votre inscription a bien été pris en compte. un mail de confirmation vous a été envoyé, pensez à véifier vos spams!');
 
-            return $this->redirectToRoute('app_accueil');
+            return $this->redirectToRoute('app_login');
         }
 
         return $this->render('registration/register.html.twig', [
@@ -85,9 +91,9 @@ class RegistrationController extends AbstractController
         }
 
         // @TODO Change the redirect on success and handle or remove the flash message in your templates
-        $this->addFlash('success', 'Votre adresse Email a bien été vérifié.');
+        $this->addFlash('success2', 'Votre adresse Email a bien été vérifié.');
 
-        return $this->redirectToRoute('app_register');
+        return $this->redirectToRoute('app_login');
     }
 
 
@@ -102,6 +108,31 @@ class RegistrationController extends AbstractController
 
     ]);
     }
+
+
+    // #[route('/delete_plat/{id}', name: 'app_delete_plat')]
+    // public function deleteItems(Plat $plat)
+    // {
+    //     $id = $plat->getId();
+    //     $panier = $this->ps->deleteItems($id);
+
+    //     return $this->redirectToRoute('app_panier');
+    // }
+
+
+
+    // #[route('/delete_account', name: 'app_delete_account')]
+    // public function DeleteAccount(Utilisateur $utilisateur):response
+    // {
+    //     $id = $this->$utilisateur->getId();
+    //     $user = $this->em->DeleteAccount($id);
+        
+ 
+    //     return $this->redirectToRoute('app_accueil');
+
+    // }
+
+
 
     // #[route('/modificate_account', name: 'app_modificate_account')]
     // public function modificateAccount(Request $request, UserPasswordHasherInterface $userPasswordHasher):response

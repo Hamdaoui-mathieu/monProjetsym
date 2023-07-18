@@ -2,33 +2,62 @@
 
 namespace App\Entity;
 
+
+
+use ApiPlatform\Metadata\Get;
+use ApiPlatform\Metadata\GetCollection;
+use ApiPlatform\Metadata\Patch;
+use ApiPlatform\Metadata\Post;
+use ApiPlatform\Metadata\Put;
+
 use App\Repository\PlatRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
+use ApiPlatform\Metadata\ApiResource;
+use Symfony\Component\Serializer\Annotation\Groups;
+use ApiPlatform\Metadata\Delete;
+
 
 #[ORM\Entity(repositoryClass: PlatRepository::class)]
+#[ApiResource(operations: [
+    new Get(),  
+    //    new Put(),
+    //    new Patch(),
+    //    new Delete(),
+    new GetCollection(),
+    //    new Post(),
+]
+)
+]
+
 class Plat
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column]
+    #[Groups(['read'])]
     private ?int $id = null;
 
     #[ORM\Column(length: 255)]
+    #[Groups(['read'])]
     private ?string $libelle = null;
 
     #[ORM\Column(type: Types::TEXT)]
+    #[Groups(['read'])]
     private ?string $description = null;
 
     #[ORM\Column(type: Types::DECIMAL, precision: 10, scale: 2)]
+    #[Groups(['read'])]
     private ?string $prix = null;
 
     #[ORM\Column(length: 50, nullable: true)]
+    #[Groups(['read', 'write'])]
     private ?string $image = null;
 
     #[ORM\Column]
+    #[Groups(['read'])]
     private ?bool $active = null;
 
 

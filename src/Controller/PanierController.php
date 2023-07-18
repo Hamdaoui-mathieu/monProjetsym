@@ -117,14 +117,6 @@ public function remove_plat(Plat $plat)
     #[route('/valider_panier', name:'app_valider_panier')]
     public function validerAllItems(Request $request, UtilisateurRepository $userRepo,  MailerInterface $mi, DetailRepository $dr)
     {
-        // $nom = $request->request->get('nom');
-        // $prenom = $request->request->get('prenom');
-        // $adresse = $request->request->get('adresse');
-        // $cp = $request->request->get('cp');
-        // $ville = $request->request->get('ville');
-        // $email= $request->request->get('email');
-
-
 
         $userMail = $this->getUser()->getUserIdentifier();
         $vraiUser = $userRepo->findOneBy(["email"=> $userMail]);
