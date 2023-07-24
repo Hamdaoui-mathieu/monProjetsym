@@ -1,5 +1,15 @@
 <?php
 
+// env.local DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name?serverVersion=mariadb-10.3.34&charset=utf8mb4"
+//php bin/console doctrine:database:drop --force
+//php bin/console doctrine:database:create
+//php bin/console make:entity 'mettre nom entité'
+//php bin/console d:s:u --force
+
+//créer une relation=>
+//php bin/console make:entity 'nom de l'entity'
+//php bin/console d:s:u --force
+
 namespace App\DataFixtures;
 
 use Doctrine\Bundle\FixturesBundle\Fixture;
