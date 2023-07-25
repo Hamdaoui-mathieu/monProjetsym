@@ -9,6 +9,7 @@ use App\Security\EmailVerifier;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bridge\Twig\Mime\TemplatedEmail;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Bundle\SecurityBundle\Security;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\RequestStack;
 use Symfony\Component\HttpFoundation\Response;
@@ -104,9 +105,26 @@ class RegistrationController extends AbstractController
  
         return $this->render('registration/infos_account.html.twig', [
                 'controller_name'=> 'RegistrationController',
-                "user" => $user
+                'user' => $user
 
     ]);
+    }
+
+    #[Route('/infos_account', name: 'app_info_account')]
+    
+    public function info_account( Security $security): Response
+    {
+        $this->denyAccessUnlessGranted('ROLE_USER');
+        $user = $security->getUser();
+
+        
+        
+        // $user = $this->utilisateurRepo ->find($id);
+        
+        return $this->render('registration/infos_account.html.twig', [
+        'controller_name' => 'RegistrationController',
+        'user' => $user
+        ]);
     }
 
 

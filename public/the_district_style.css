@@ -40,6 +40,7 @@
     }
     
 p{
+
     font-family: cursive;
     font-size: xx-large;
     
@@ -61,7 +62,11 @@ p{
     position: relative;
 }
 
-
+.text{
+   font-size: xx-large;
+    /* color: rgb(115, 255, 0);
+    font-family: cursive; */
+}
 
 .back {
     background-color: rgba(194, 189, 189, 0.541);

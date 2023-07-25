@@ -1,12 +1,12 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-{% if is_granted("ROLE_USER") %}
+{# {% if is_granted("ROLE_USER") %}
         <div class="mb-3 float-right">
             Connecté en tant que {{ app.user.prenom }}
             {# <a href="{{ path('app_logout') }}">Déconnexion</a> #}
-        </div>
-    {% endif %}
+        {# </div>
+    {% endif %}  #}
     
 <div class="bg1">
     <form method="post" action={{path('app_search')}} class="float-right" role="search">
@@ -41,12 +41,12 @@
         {% for categorie in categories %}
 
             <div class="col afftexton col-lg-4 col-md-4 col-sm-6 col-xs-12 text-center" >
-            <a href="{{path('app_plat_categorie', {"libelle" : categorie.libelle })}}">
-                <img class="zoom" src="{{ '/category/' ~ categorie.image }}" class="rounded img-responsive;" height="250px" width="250px"> 
+            <a  href="{{path('app_plat_categorie', {"libelle" : categorie.libelle })}}">
+                <img class="zoom rounded-circle" src="{{ '/category/' ~ categorie.image }}" class="rounded img-responsive;" height="250px" width="250px"> 
             </a>
                 <br>
                 <br>
-                {{categorie.libelle}}
+                <p class="text">{{categorie.libelle}}</p>
               <br>
             </div>
         {% endfor %}
@@ -67,12 +67,12 @@
         {% for plat in plats %}
 
             <div class="col afftexton col-lg-4 col-md-4 col-sm-6 col-xs-12 text-center" >
-                <a href="{{path('app_detail_plat', {"libelle" : plat.libelle })}}">
-                    <img class="zoom" src="{{ '/food/' ~ plat.image }}" class="rounded img-responsive;" height="250px" width="250px"> 
+                <a class="text" href="{{path('app_detail_plat', {"libelle" : plat.libelle })}}">
+                    <img class="zoom border border-primary" src="{{ '/food/' ~ plat.image }}" class="rounded img-responsive;" height="250px" width="250px"> 
                 </a>
                     <br>
                     <br>
-                    {{plat.libelle}}
+                    <p class="text">{{plat.libelle}}</p>
               
             </div>
 

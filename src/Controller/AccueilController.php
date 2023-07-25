@@ -106,22 +106,22 @@ class AccueilController extends AbstractController
         ]);
     }
 
-    #[Route('/infos_account', name: 'app_info_account')]
+    // #[Route('/infos_account', name: 'app_info_account')]
     
-    public function info_account( Security $security): Response
-    {
-        $this->denyAccessUnlessGranted('ROLE_USER');
-        $usertest = $security->getUser();
+    // public function info_account( Security $security): Response
+    // {
+    //     $this->denyAccessUnlessGranted('ROLE_USER');
+    //     $usertest = $security->getUser();
 
         
         
-        // $user = $this->utilisateurRepo ->find($id);
+    //     // $user = $this->utilisateurRepo ->find($id);
         
-        return $this->render('registration/infos_account.html.twig', [
-        'controller_name' => 'AccueilController',
-        'user' => $usertest
-        ]);
-    }
+    //     return $this->render('registration/infos_account.html.twig', [
+    //     'controller_name' => 'AccueilController',
+    //     'user' => $usertest
+    //     ]);
+    // }
 
     #[Route('/detail_plat/{libelle}', name: 'app_detail_plat')]
     public function detail_plat(Plat $id): Response
